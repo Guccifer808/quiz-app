@@ -25,7 +25,7 @@ const QCard: React.FC<QCardProps> = ({
             {/* Buttons */}
             <CustomButton
               value='False'
-              colorScheme='blue'
+              colorScheme='orange'
               variant='outline'
               width='full'
               onClick={callback}
