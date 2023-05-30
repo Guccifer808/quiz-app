@@ -1,0 +1,32 @@
+body {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    height: 100vh;
+  }
+  
+  .startQuiz {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    text-align: center;
+  }
+  
+  .startQuiz p {
+    margin-bottom: 20px;
+  }
+  
+  .startQuiz > div {
+    padding: 50px;
+  }
+  
+  .answer-list {
+    margin: 25px 0px;
+  }
+  
+  .answer-list ul {
+    margin-top: 5px;
+  }

@@ -1,4 +1,4 @@
-import { Box, Heading, Flex } from '@chakra-ui/react';
+import { Box, Heading, Flex, Spacer } from '@chakra-ui/react';
 import { QCardProps } from 'src/interface/index';
 import CustomButton from '../CustomButton';
 
@@ -12,19 +12,40 @@ const QCard: React.FC<QCardProps> = ({
   return (
     <>
       <Box bg='white' width='100%'>
-        <Box mb={6} fontSize='md' fontWeight='bold' textTransform='uppercase'>
+        <Box
+          mb={6}
+          fontSize='md'
+          fontWeight='bold'
+          textTransform='uppercase'
+          textAlign='center'
+        >
           Your progress: {questionNumber}/{totalQuestions}
         </Box>
         {/* category */}
-        <Box>{category}</Box>
+        <Box fontSize='md' mb={1} textAlign='center'>
+          Category: {category}
+        </Box>
         <Heading>
-          <Box>{questions}</Box>
+          <Box textAlign='center' my={6} fontSize='xl'>
+            {questions}
+          </Box>
         </Heading>
-        <Flex>
-          <Box>
-            {/* Buttons */}
+        <Flex direction='column'>
+          <Box w='100%' mb={4}>
+            {/* Button 1 */}
             <CustomButton
               value='False'
+              colorScheme='orange'
+              variant='outline'
+              width='full'
+              onClick={callback}
+            />
+          </Box>
+          <Spacer />
+          <Box w='100%' mb={4}>
+            {/* Button 2 */}
+            <CustomButton
+              value='True'
               colorScheme='orange'
               variant='outline'
               width='full'

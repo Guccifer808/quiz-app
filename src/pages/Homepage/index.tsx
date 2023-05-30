@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import { getQuestions } from 'src/services/fetchQuestions';
 import { QCard } from 'src/components/index';
 import { Answer, QuestionsProps } from 'src/interface/index';
@@ -6,6 +6,8 @@ import { Difficulty, totalQuestions } from 'src/constants/index';
 import { Loader } from 'src/components/index';
 import { CustomButton } from 'src/components/index';
 import { Box, Heading, Divider } from '@chakra-ui/react';
+
+import './index.css';
 
 const Homepage = () => {
   const [questions, setQuestions] = useState<QuestionsProps[]>([]);
@@ -28,17 +30,54 @@ const Homepage = () => {
     fetchQuestions();
   }, []);
 
-  const validateAnswer = () => {
-    setQuestionNumber(1);
+  const validateAnswer = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    if (endQuiz) return;
+    const selectedAnswer = e.currentTarget.innerText;
+    const correct = questions[questionNumber].correct_answer === selectedAnswer;
+    if (correct) setResult((prev) => prev + 1);
+    // in case user clicked on different answers more than 1 time
+    if (userAnswer.length != questionNumber) {
+      if (!correct) setResult((prev) => prev - 1);
+      const lastIndex = userAnswer.length - 1;
+      if (lastIndex >= 0) {
+        userAnswer.splice(lastIndex, 1);
+        const Answer = {
+          question: questions[questionNumber]?.question,
+          answer: selectedAnswer,
+          correct,
+          correctAnswer: questions[questionNumber]?.correct_answer,
+        };
+        setUserAnswer((prev) => [...prev, Answer]);
+      }
+      return;
+    }
+    const Answer = {
+      question: questions[questionNumber]?.question,
+      answer: selectedAnswer,
+      correct,
+      correctAnswer: questions[questionNumber]?.correct_answer,
+    };
+    setUserAnswer((prev) => [...prev, Answer]);
   };
-  const startQuizHandler = () => {
-    console.log('start ');
+  const startQuizHandler = (): void => {
+    setStartQuiz(true);
   };
-  const nextQuestion = () => {
-    console.log('next q');
+  const nextQuestion = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    const nextQuestion = questionNumber + 1;
+    if (totalQuestions === nextQuestion) {
+      setEndQuiz(true);
+      return;
+    }
+    setQuestionNumber(nextQuestion);
   };
-  const restartQuiz = () => {
-    console.log('restart');
+  const restartQuiz = (): void => {
+    setStartQuiz(false);
+    setEndQuiz(false);
+    setQuestionNumber(0);
+    setResult(0);
+    setUserAnswer([]);
   };
   return (
     <>
@@ -49,7 +88,7 @@ const Homepage = () => {
         !loading &&
         !startQuiz ? (
           <>
-            <div className='startScreen-box'>
+            <div className='startQuiz'>
               <Box boxShadow='base' p='6' bg='white' maxW='550px' rounded='md'>
                 <Heading as='h1' size='lg' mb={2}></Heading>
                 <p>
