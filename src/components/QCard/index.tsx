@@ -26,7 +26,7 @@ const QCard: React.FC<QCardProps> = ({
           Category: {category}
         </Box>
         <Heading>
-          <Box textAlign='center' my={6} fontSize='xl'>
+          <Box textAlign='center' my={4} fontSize='xl'>
             {questions}
           </Box>
         </Heading>

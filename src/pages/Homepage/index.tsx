@@ -68,7 +68,7 @@ const Homepage = () => {
     const nextQuestion = questionNumber + 1;
     if (totalQuestions === nextQuestion) {
       setEndQuiz(true);
-      return;
+      // return;
     }
     setQuestionNumber(nextQuestion);
   };
@@ -90,10 +90,12 @@ const Homepage = () => {
           <>
             <div className='startQuiz'>
               <Box boxShadow='base' p='6' bg='white' maxW='550px' rounded='md'>
-                <Heading as='h1' size='lg' mb={2}></Heading>
+                <Heading as='h1' size='lg' mb={4}>
+                  Quiz App
+                </Heading>
                 <p>
-                  There are {totalQuestions}. Please answer true or false. Good
-                  Luck!
+                  There are {totalQuestions} questions. Please answer true or
+                  false. Good Luck!
                 </p>
                 <CustomButton
                   variant='solid'
@@ -119,7 +121,7 @@ const Homepage = () => {
         )}
         {/* Main Card */}
         {!loading && !endQuiz && startQuiz && (
-          <>
+          <Box p='4' bg='white' maxW='560px' boxShadow='base' rounded='md'>
             <QCard
               questions={questions[questionNumber].question}
               category={questions[questionNumber].category}
@@ -141,7 +143,7 @@ const Homepage = () => {
               className='next-btn'
               onClick={nextQuestion}
             />
-          </>
+          </Box>
         )}
         {endQuiz && (
           <>
