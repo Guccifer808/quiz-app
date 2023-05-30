@@ -17,6 +17,7 @@ const Homepage = () => {
   const [endQuiz, setEndQuiz] = useState<boolean>(false);
   const [userAnswer, setUserAnswer] = useState<Answer[]>([]);
   const [result, setResult] = useState<number>(0);
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -59,6 +60,7 @@ const Homepage = () => {
       correctAnswer: questions[questionNumber]?.correct_answer,
     };
     setUserAnswer((prev) => [...prev, Answer]);
+    setIsDisabled(false); // Enable the button after selecting an answer
   };
   const startQuizHandler = (): void => {
     setStartQuiz(true);
@@ -68,9 +70,10 @@ const Homepage = () => {
     const nextQuestion = questionNumber + 1;
     if (totalQuestions === nextQuestion) {
       setEndQuiz(true);
-      // return;
     }
     setQuestionNumber(nextQuestion);
+    console.log(isDisabled);
+    setIsDisabled(true); // Disable the button after clicking
   };
   const restartQuiz = (): void => {
     setStartQuiz(false);
@@ -130,12 +133,7 @@ const Homepage = () => {
               callback={validateAnswer}
             />
             <CustomButton
-              disabled={
-                userAnswer.length === questionNumber + 1 &&
-                questionNumber !== totalQuestions
-                  ? ''
-                  : 'disabled'
-              }
+              disabled={isDisabled}
               variant='solid'
               colorScheme='orange'
               value='Next Question'
