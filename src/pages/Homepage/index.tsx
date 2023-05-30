@@ -147,11 +147,16 @@ const Homepage = () => {
           <>
             <Box boxShadow='base' p='6' bg='white' maxW='560px' rounded='md'>
               <Box mb={4}>
-                <Box as='h3' fontSize='3xl' fontWeight='bold'>
-                  End Quiz
+                <Box
+                  as='h3'
+                  fontSize='3xl'
+                  fontWeight='bold'
+                  textAlign='center'
+                >
+                  End of the Quiz
                 </Box>
                 <Box as='h3' fontSize='xl'>
-                  Good job! {result}/{totalQuestions}correct answers.
+                  Good job! {result}/{totalQuestions} correct answers.
                 </Box>
               </Box>
               <Divider />

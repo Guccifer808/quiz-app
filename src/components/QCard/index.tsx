@@ -27,7 +27,7 @@ const QCard: React.FC<QCardProps> = ({
         </Box>
         <Heading>
           <Box textAlign='center' my={4} fontSize='xl'>
-            {questions}
+            <div dangerouslySetInnerHTML={{ __html: questions }}></div>
           </Box>
         </Heading>
         <Flex direction='column'>
