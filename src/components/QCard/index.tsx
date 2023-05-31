@@ -10,8 +10,8 @@ const QCard: React.FC<QCardProps> = ({
   callback,
 }) => {
   return (
-    <>
-      <Box bg='white' width='100%'>
+    <div className='quiz'>
+      <Box bg='white' width='100%' minH='400px' w={[300, 400]}>
         <Box
           mb={6}
           fontSize='md'
@@ -22,16 +22,16 @@ const QCard: React.FC<QCardProps> = ({
           Your progress: {questionNumber}/{totalQuestions}
         </Box>
         {/* category */}
-        <Box fontSize='md' mb={1} textAlign='center'>
+        <Box fontSize='md' mb={4} textAlign='center'>
           Category: {category}
         </Box>
         <Heading>
-          <Box textAlign='center' my={4} fontSize='xl'>
+          <Box textAlign='center' my={10} fontSize='xl' h='100px'>
             <div dangerouslySetInnerHTML={{ __html: questions }}></div>
           </Box>
         </Heading>
         <Flex direction='column'>
-          <Box w='100%' mb={4}>
+          <Box w='100%' mb={4} mt={4}>
             {/* Button 1 */}
             <CustomButton
               value='False'
@@ -54,7 +54,7 @@ const QCard: React.FC<QCardProps> = ({
           </Box>
         </Flex>
       </Box>
-    </>
+    </div>
   );
 };
 

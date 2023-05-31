@@ -5,7 +5,7 @@ import { Answer, QuestionsProps } from 'src/interface/index';
 import { Difficulty, totalQuestions } from 'src/constants/index';
 import { Loader } from 'src/components/index';
 import { CustomButton } from 'src/components/index';
-import { Box, Heading, Divider } from '@chakra-ui/react';
+import { Box, Heading, Divider, Flex } from '@chakra-ui/react';
 
 import './index.css';
 
@@ -124,7 +124,18 @@ const Homepage = () => {
         )}
         {/* Main Card */}
         {!loading && !endQuiz && startQuiz && (
-          <Box p='4' bg='white' maxW='560px' boxShadow='base' rounded='md'>
+          <Flex
+            p='4'
+            bg='white'
+            maxW='500px'
+            boxShadow='base'
+            rounded='md'
+            direction='column'
+            alignItems='center'
+            justifyContent='center'
+            justifyItems='center'
+            mx={2}
+          >
             <QCard
               questions={questions[questionNumber].question}
               category={questions[questionNumber].category}
@@ -141,21 +152,27 @@ const Homepage = () => {
               className='next-btn'
               onClick={nextQuestion}
             />
-          </Box>
+          </Flex>
         )}
         {endQuiz && (
           <>
             <Box boxShadow='base' p='6' bg='white' maxW='560px' rounded='md'>
-              <Box mb={4}>
+              <Box>
                 <Box
                   as='h3'
                   fontSize='3xl'
                   fontWeight='bold'
                   textAlign='center'
                 >
-                  End of the Quiz
+                  Results
                 </Box>
-                <Box as='h3' fontSize='xl'>
+                <Box
+                  as='h3'
+                  fontSize='xl'
+                  mb={2}
+                  textAlign='center'
+                  fontWeight='bold'
+                >
                   Good job! {result}/{totalQuestions} correct answers.
                 </Box>
               </Box>
@@ -164,7 +181,9 @@ const Homepage = () => {
                 <Box key={index}>
                   <div className='answers'>
                     <Box fontSize='md' fontWeight='bold'>
-                      Q: {answer.question}
+                      <p
+                        dangerouslySetInnerHTML={{ __html: answer.question }}
+                      ></p>
                     </Box>
                     <ul>
                       <li>Your answer: {answer.answer}</li>

@@ -19,6 +19,7 @@ const CustomButton: React.FC<ButtonProps> = ({
         className={className}
         disabled={disabled}
         width={width}
+        mt={2}
       >
         {value}
       </Button>
